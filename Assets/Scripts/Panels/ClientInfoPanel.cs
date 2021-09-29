@@ -7,6 +7,11 @@ public class ClientInfoPanel : MonoBehaviour, IPanel
 {
     public Text caseNumberText;
     public InputField firstName, lastName;
+
+    private void OnEnable()
+    {
+        caseNumberText.text = "CASE NUMBER: " + UIManager.Instance.activeCase.caseID;
+    }
     public void ProcessInfo()
     {
         

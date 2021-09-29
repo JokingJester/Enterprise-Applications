@@ -2320,7 +2320,43 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 593584631}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 695534403}
+        m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+        m_MethodName: CreateNewCase
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 2096957116}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1230213489}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &593584631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2923,6 +2959,7 @@ GameObject:
   - component: {fileID: 695534401}
   - component: {fileID: 695534400}
   - component: {fileID: 695534399}
+  - component: {fileID: 695534403}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -3015,6 +3052,26 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &695534403
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 695534398}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b1c913403564d754daccb52bf97f3698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeCase:
+    caseID: 
+    name: 
+    date: 
+    location: 
+    locationNotes: 
+    photoTaken: {fileID: 0}
+    photoNotes: 
 --- !u!1 &727920170
 GameObject:
   m_ObjectHideFlags: 0
