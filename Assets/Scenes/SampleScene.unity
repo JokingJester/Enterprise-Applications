@@ -5009,7 +5009,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   map: {fileID: 1589287024}
+  caseNumberText: {fileID: 1305331448}
   mapNotes: {fileID: 6517771}
+  apiKey: AIzaSyAr92z1d53UQqtKd1guHnKXkQb7C1uDI40
+  xCoord: 0
+  yCoord: 0
+  zoom: 12
+  imageSize: 400
+  url: https://maps.googleapis.com/maps/api/staticmap?
 --- !u!1 &1206504043
 GameObject:
   m_ObjectHideFlags: 0
