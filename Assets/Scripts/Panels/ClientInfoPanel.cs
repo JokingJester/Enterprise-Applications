@@ -6,7 +6,10 @@ using UnityEngine.UI;
 public class ClientInfoPanel : MonoBehaviour, IPanel
 {
     public Text caseNumberText;
+    public Text errorMessage;
     public InputField firstName, lastName;
+
+    [SerializeField] private GameObject _locationPanel;
 
     private void OnEnable()
     {
@@ -14,6 +17,13 @@ public class ClientInfoPanel : MonoBehaviour, IPanel
     }
     public void ProcessInfo()
     {
-        
+        if (firstName.text.Length > 0 && lastName.text.Length > 0)
+        {
+            UIManager.Instance.activeCase.name = firstName.text + " " + lastName.text;
+            errorMessage.gameObject.SetActive(false);
+            _locationPanel.SetActive(true);
+        }
+        else
+            errorMessage.gameObject.SetActive(true);
     }
 }
