@@ -15,7 +15,7 @@ public class TakePhotoPanel : MonoBehaviour, IPanel
 	}
 	public void ProcessInfo()
 	{
-		UIManager.Instance.activeCase.photoTaken = photoTaken;
+		UIManager.Instance.activeCase.photoTaken = photoTaken.texture;
 		UIManager.Instance.activeCase.photoNotes = photoNotes.text;
 	}
 
