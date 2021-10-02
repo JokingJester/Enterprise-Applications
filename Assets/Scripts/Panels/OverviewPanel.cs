@@ -18,6 +18,7 @@ public class OverviewPanel : MonoBehaviour, IPanel
         caseNumberTitle.text = "CASE NUMBER: " + UIManager.Instance.activeCase.caseID;
         nameTitle.text = UIManager.Instance.activeCase.name;
         dateTitle.text = DateTime.Now.ToString();
+        UIManager.Instance.activeCase.date = dateTitle.text;
         locationNotes.text = "LOCATION NOTES: \n" + UIManager.Instance.activeCase.locationNotes;
 
         //Converting byte array to a raw image and displaying it

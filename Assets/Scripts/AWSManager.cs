@@ -11,6 +11,8 @@ using System.Collections.Generic;
 using Amazon.CognitoIdentity;
 using Amazon;
 using UnityEngine.SceneManagement;
+using System.Linq;
+using System.Runtime.Serialization.Formatters.Binary;
 
 public class AWSManager : MonoBehaviour
 {
@@ -93,6 +95,77 @@ public class AWSManager : MonoBehaviour
             else
             {
                 Debug.Log("Exception occured during upload " + responseObj.Exception);
+            }
+        });
+    }
+
+    public void GetList(string caseNumber, Action onComplete = null)
+    {
+        Debug.Log("Getting List");
+        string target = "case#" + caseNumber;
+        var request = new ListObjectsRequest()
+        {
+            BucketName = "casefilesinsuranceapp"
+        };
+
+        S3Client.ListObjectsAsync(request, (responseObj) =>
+        {
+            if (responseObj.Exception == null)
+            {
+                bool caseFound = responseObj.Response.S3Objects.Any(obj => obj.Key == target);
+                if(caseFound == true)
+                {
+                    Debug.Log("Case Found");
+                    S3Client.GetObjectAsync("casefilesinsuranceapp", target, (responseObj) =>
+                    {
+                        //read the data and apply case object to be used
+
+                        //check if response stream is null
+                        if(responseObj.Response != null)
+                        {
+                            //byte array to store data from file
+                            byte[] data = null;
+
+                            //use stream reader to read response data
+                            using (StreamReader reader = new StreamReader(responseObj.Response.ResponseStream))
+                            {
+                                //access a memory stream
+                                using(MemoryStream memory = new MemoryStream())
+                                {
+                                    //populate data byte array with the memstream stream data
+                                    var buffer = new byte[512];
+                                    var bytesRead = default(int);
+
+                                    while((bytesRead = reader.BaseStream.Read(buffer, 0, buffer.Length)) > 0)
+                                    {
+                                        memory.Write(buffer, 0, bytesRead);
+                                    }
+                                    data = memory.ToArray();
+                                }
+                            }
+
+                            //convert those bytes to a case
+                            using (MemoryStream memory = new MemoryStream(data))
+                            {
+                                BinaryFormatter bf = new BinaryFormatter();
+                                Case downloadedCase = bf.Deserialize(memory) as Case;
+                                UIManager.Instance.activeCase = downloadedCase;
+
+                                if (onComplete != null)
+                                    onComplete();
+                            }
+
+                        }
+                    });
+                }
+                else
+                {
+                    Debug.Log("Case Not Found");
+                }
+            }
+            else
+            {
+                Debug.Log("Error getting list of items " + responseObj.Exception);
             }
         });
     }
