@@ -10,6 +10,7 @@ using Amazon.S3.Util;
 using System.Collections.Generic;
 using Amazon.CognitoIdentity;
 using Amazon;
+using UnityEngine.SceneManagement;
 
 public class AWSManager : MonoBehaviour
 {
@@ -39,7 +40,7 @@ public class AWSManager : MonoBehaviour
             if(_s3Client == null)
             {
                 _s3Client = new AmazonS3Client(new CognitoAWSCredentials(
-                "My Identity Pool", // Identity Pool ID
+                "us-east-2:9a543040-f461-4401-8dce-82df68c2230f", // Identity Pool ID
                 RegionEndpoint.USEast2),_S3Region);
             }
             return _s3Client;
@@ -53,7 +54,7 @@ public class AWSManager : MonoBehaviour
         UnityInitializer.AttachToGameObject(this.gameObject);
         AWSConfigs.HttpClient = AWSConfigs.HttpClientOption.UnityWebRequest;
 
-        // ResultText is a label used for displaying status information
+        /* ResultText is a label used for displaying status information
         S3Client.ListBucketsAsync(new ListBucketsRequest(), (responseObject) =>
         {
             if (responseObject.Exception == null)
@@ -66,6 +67,32 @@ public class AWSManager : MonoBehaviour
             else
             {
                 Debug.Log("AWS Error " + responseObject.Exception);
+            }
+        });
+        */
+    }
+
+    public void UploadToAWS(string filePath, string caseID)
+    {
+        FileStream stream = new FileStream(filePath, FileMode.Open, FileAccess.ReadWrite, FileShare.ReadWrite);
+        PostObjectRequest request = new PostObjectRequest()
+        {
+            Bucket = "casefilesinsuranceapp",
+            Key = "case#" + caseID,
+            InputStream = stream,
+            CannedACL = S3CannedACL.Private,
+            Region = _S3Region
+        };
+
+        S3Client.PostObjectAsync(request, (responseObj) => 
+        {
+            if(responseObj.Exception == null)
+            {
+                SceneManager.LoadScene(0);
+            }
+            else
+            {
+                Debug.Log("Exception occured during upload " + responseObj.Exception);
             }
         });
     }

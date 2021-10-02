@@ -50,5 +50,8 @@ public class UIManager : MonoBehaviour
         FileStream file = File.Create(filePath);
         bf.Serialize(file, awsCase);
         file.Close();
+
+        //Send file to AWS
+        AWSManager.Instance.UploadToAWS(filePath, awsCase.caseID);
     }
 }
