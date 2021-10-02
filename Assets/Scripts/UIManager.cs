@@ -46,7 +46,8 @@ public class UIManager : MonoBehaviour
 
         //Save Case Data To A File
         BinaryFormatter bf = new BinaryFormatter();
-        FileStream file = File.Create(Application.persistentDataPath + "/case#" + awsCase.caseID + ".dat");
+        string filePath = Application.persistentDataPath + "/case#" + awsCase.caseID + ".dat";
+        FileStream file = File.Create(filePath);
         bf.Serialize(file, awsCase);
         file.Close();
     }

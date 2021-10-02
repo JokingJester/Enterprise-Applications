@@ -6440,6 +6440,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 342cf2059a55d2745823a459a23e2065, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  S3Region: us-east-2
 --- !u!4 &1664192905
 Transform:
   m_ObjectHideFlags: 0
